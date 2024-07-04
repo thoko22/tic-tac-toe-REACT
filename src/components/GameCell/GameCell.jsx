@@ -10,48 +10,53 @@ import { ReactComponent as IconO } from "../../assets/svgs/icon-o.svg";
 import { ReactComponent as OIconOutline } from "../../assets/svgs/icon-o-outline.svg";
 import { SoundContext } from "../../contexts/SoundContext";
 
-function GameCell({ cellItem, index }) {
+function GameCell({ cellItem, index, isWinningCell }) {
+  console.log(isWinningCell);
   const { updateBoard, game, roundComplete } = useContext(GameContext);
-  const {hoverSound, clickSound, winSound, completedSound} = useContext(SoundContext);
+  const { hoverSound, clickSound, winSound } =
+    useContext(SoundContext);
   const { handleModal } = useContext(ModalContext);
 
   const cellClickHandler = () => {
     clickSound();
     updateBoard(index);
-    const result = checkForWinner(game.board)
-    if(result) {
-      roundComplete(result)
-      if(result !== "draw") {
+    const result = checkForWinner(game.board);
+    if (result) {
+      roundComplete(result);
+      if (result !== "draw") {
         winSound();
-      }else {
-        completedSound();
       }
-      handleModal(<RoundOverModal />)
-    };
+      setTimeout(() => {
+        handleModal(<RoundOverModal />);
+      }, 2000);
+     
+
+    }
   };
 
   if (cellItem === "x") {
     return (
-      <CellStyle>
-        <IconX className="markedItem"/>
+      <CellStyle isWinningCell={isWinningCell ?? false}>
+        <IconX className="markedItem" />
       </CellStyle>
     );
   } else if (cellItem === "o") {
     return (
-      <CellStyle>
-        <IconO className="markedItem"/>
+      <CellStyle isWinningCell={isWinningCell ?? false}>
+        <IconO className="markedItem" />
       </CellStyle>
     );
   }
 
   return (
     <CellStyle onClick={cellClickHandler} onMouseEnter={() => hoverSound()}>
-      {game.turn === "x" ? 
-      (<XIconOutline className="outlineIcon"/>) 
-      : 
-      (<OIconOutline className="outlineIcon"/>)}
+      {game.turn === "x" ? (
+        <XIconOutline className="outlineIcon" />
+      ) : (
+        <OIconOutline className="outlineIcon" />
+      )}
     </CellStyle>
   );
-};
+}
 
 export default GameCell;

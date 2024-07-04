@@ -22,6 +22,7 @@ export const GameContextProvider = (props) => {
     },
     turn: "x",
     roundWinner: "",
+    winningCombo: []
   });
 
   const updateBoard = (index) => {
@@ -38,7 +39,9 @@ export const GameContextProvider = (props) => {
     setGame({
       ...game,
       board: [null, null, null, null, null, null, null, null, null],
-      turn: "x"
+      turn: "x",
+      winningCombo: [],
+      roundWinner: "",
     });
   };
 
@@ -61,6 +64,7 @@ export const GameContextProvider = (props) => {
     },
     turn: "x",
     roundWinner: "",
+    winningCombo: []
     })
   }
 
@@ -81,7 +85,7 @@ export const GameContextProvider = (props) => {
     }));
   };
 
-  const updateScore = (winner) => {
+  const updateScore = (winner, result) => {
     // winner player1, player2 or draw
 
     if(winner === "draw") {
@@ -96,6 +100,7 @@ export const GameContextProvider = (props) => {
           score: prevGame.player2.score + 0.5,
         },
         roundWinner: "",
+        winningCombo: [0,1,2,3,4,5,6,7,8]
       }));
     } else {
       setGame((prevGame) => ({
@@ -104,7 +109,8 @@ export const GameContextProvider = (props) => {
           ...prevGame[winner],
           score: prevGame[winner].score + 1
         },
-        roundWinner: game[winner]
+        roundWinner: game[winner],
+        winningCombo: result
       }));
     }
   
@@ -112,12 +118,12 @@ export const GameContextProvider = (props) => {
     
   const roundComplete = (result) => {
     if (game.turn === game.player1.choice && result !== "draw") {
-      updateScore("player1");
+      updateScore("player1", result);
     } else if (game.turn === game.player2.choice && result !== "draw") {
-      updateScore("player2");
+      updateScore("player2", result);
     } else {
       console.log("Draw");
-      updateScore("draw");
+      updateScore("draw", result);
     }
     switchTurn();
   };

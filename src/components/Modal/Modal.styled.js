@@ -22,7 +22,7 @@ export const ModalContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  color: ${(props) => props.theme.color.primary};
+  background-color: ${(props) => props.theme.color.primary};
 
   ${(props) => props.theme.media.mobile} {
     min-width: 200px;

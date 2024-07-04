@@ -1,7 +1,7 @@
 
 import React, { useContext } from "react";
 import { ThemeContext } from "../../contexts/ThemeContext";
-import { DarkModeIcon, HeaderWrapper, LightModeIcon } from "../Header.styled";
+import { DarkModeIcon, HeaderWrapper, LightModeIcon } from "../Header/Header.styled";
 import { ReactComponent as Logo } from "../../assets/svgs/tic-tac-toe.svg";
 import { useNavigate } from "react-router-dom";
 import { SoundContext } from "../../contexts/SoundContext";

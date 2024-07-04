@@ -7,9 +7,9 @@ import { ModalContext } from "../../../contexts/ModalContext";
 import { SoundContext } from "../../../contexts/SoundContext";
 import { useNavigate } from "react-router-dom";
 
-function RoundOverModal() {
+function RoundOverModal()  {
   const { resetBoard, game, restartGame } = useContext(GameContext);
-  const { hoverSound, clickSound, copletedSound } = useContext(SoundContext);
+  const { hoverSound, clickSound, completedSound } = useContext(SoundContext);
   const { handleModal } = useContext(ModalContext);
 
   const navigate = useNavigate();
@@ -47,7 +47,7 @@ function RoundOverModal() {
         <Button
           color="#8437f9"
           onClick={() => {
-            copletedSound();
+            completedSound();
             restartGame();
             handleModal();
             navigate("/");
