@@ -8,19 +8,27 @@ import { ReactComponent as IconX } from "../../assets/svgs/icon-x.svg";
 import { ReactComponent as XIconOutline } from "../../assets/svgs/icon-x-outline.svg";
 import { ReactComponent as IconO } from "../../assets/svgs/icon-o.svg";
 import { ReactComponent as OIconOutline } from "../../assets/svgs/icon-o-outline.svg";
+import { SoundContext } from "../../contexts/SoundContext";
 
 function GameCell({ cellItem, index }) {
   const { updateBoard, game, roundComplete } = useContext(GameContext);
+  const {hoverSound, clickSound, winSound, completedSound} = useContext(SoundContext);
   const { handleModal } = useContext(ModalContext);
 
   const cellClickHandler = () => {
+    clickSound();
     updateBoard(index);
     const result = checkForWinner(game.board)
     if(result) {
       roundComplete(result)
+      if(result !== "draw") {
+        winSound();
+      }else {
+        completedSound();
+      }
       handleModal(<RoundOverModal />)
     };
-  }
+  };
 
   if (cellItem === "x") {
     return (
@@ -37,7 +45,7 @@ function GameCell({ cellItem, index }) {
   }
 
   return (
-    <CellStyle onClick={cellClickHandler}>
+    <CellStyle onClick={cellClickHandler} onMouseEnter={() => hoverSound()}>
       {game.turn === "x" ? 
       (<XIconOutline className="outlineIcon"/>) 
       : 

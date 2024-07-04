@@ -21,7 +21,7 @@ export const GameContextProvider = (props) => {
       avatarConfig: genConfig()
     },
     turn: "x",
-    roundWinner: ""
+    roundWinner: "",
   });
 
   const updateBoard = (index) => {
@@ -41,6 +41,28 @@ export const GameContextProvider = (props) => {
       turn: "x"
     });
   };
+
+  const restartGame = () => {
+    setGame({
+      board: [null, null, null, null, null, null, null, null, null],
+    player1: {
+      choice: "x",
+      name: "Player1",
+      score: 0,
+      color: "#8437f9",
+      avatarConfig: genConfig()
+    },
+    player2: {
+      choice: "o",
+      name: "Player2",
+      score: 0,
+      color: "#f9c811",
+      avatarConfig: genConfig()
+    },
+    turn: "x",
+    roundWinner: "",
+    })
+  }
 
   const toggleChoice = (choice) => (choice === "x" ? "o" : "x");
 
@@ -106,7 +128,8 @@ export const GameContextProvider = (props) => {
         game,
         updateBoard,
         resetBoard,
-        roundComplete
+        roundComplete,
+        restartGame
       }}
     >
       {props.children}

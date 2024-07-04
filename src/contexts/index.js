@@ -1,11 +1,16 @@
 import React from "react";
 import { ThemeContextProvider } from "./ThemeContext";
 import { GameContextProvider } from "./GameContexts";
+import { SoundContextProvider } from "./SoundContext";
 
 const Provider = ({ children }) => {
   return (
     <ThemeContextProvider>
-      <GameContextProvider>{children}</GameContextProvider>
+      <GameContextProvider>
+        <SoundContextProvider>
+        {children}
+        </SoundContextProvider>
+      </GameContextProvider>
     </ThemeContextProvider>
   );
 };
