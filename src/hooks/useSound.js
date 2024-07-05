@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 
 const useSound = (url, options) => {
@@ -20,9 +19,7 @@ const useSound = (url, options) => {
       sound.pause();
       sound.currentTime = 0;
     }, options.timeout);
-   
   };
 };
 
 export default useSound;
-

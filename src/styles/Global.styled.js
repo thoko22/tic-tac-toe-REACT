@@ -12,7 +12,7 @@ export const GlobalStyle = createGlobalStyle`
 }
 
 body {
-    background-color: ${props => props.theme.color.primary};
+    background-color: ${(props) => props.theme.color.primary};
 }
 
 `;
