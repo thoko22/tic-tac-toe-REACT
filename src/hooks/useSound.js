@@ -13,7 +13,7 @@ const useSound = (url, options) => {
 
   return () => {
     if (sound) {
-      sound.play();
+    //  sound.play();
     }
     setTimeout(() => {
       sound.pause();
