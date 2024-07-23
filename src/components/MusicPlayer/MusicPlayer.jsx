@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState, useContext } from "react";
-import { MusicPlayerWrapper } from "./MusicPlayer.styled";
+import { MusicPlayerWrapper, PlayIcon, PauseIcon, NextIcon } from "./MusicPlayer.styled";
 import { playList } from "../../utils/MusicUtils/PlayList";
 import { randomizeIndex } from "../../utils/MusicUtils";
-import { PlayIcon, PauseIcon, NextIcon } from "./MusicPlayer.styled";
 import { SoundContext } from "../../contexts/SoundContext";
 import { Text } from "../../styles/General.styled";
 
